@@ -28,14 +28,30 @@
             }
         }
 
+        public function get_mahasiswa() {
+            $mahasiswa = $this->model( 'Mahasiswa_model' )->get_mahasiswa_by_id( $_POST['id'] );
+            echo json_encode( $mahasiswa );
+        }
+
         public function hapus( $id ) {
-            // var_dump( $id );
             if ( $this->model( 'Mahasiswa_model' )->delete_mahasiswa( $id ) > 0 ) {
                 Flasher::set_flash( 'Data berhasi', 'dihapus', 'success' );
                 header( 'Location:' . BASEURL . '/mahasiswa' );
                 exit;
             } else {
                 Flasher::set_flash( 'Data gagal', 'dihapus', 'danger' );
+                header( 'Location:' . BASEURL . '/mahasiswa' );
+                exit;
+            }
+        }
+
+        public function ubah() {
+            if ( $this->model( 'Mahasiswa_model' )->update_mahasiswa( $_POST ) > 0 ) {
+                Flasher::set_flash( 'Data berhasil', 'diubah', 'success' );
+                header( 'Location:' . BASEURL . '/mahasiswa' );
+                exit;
+            } else {
+                Flasher::set_flash( 'Data gagal', 'diubah', 'danger' );
                 header( 'Location:' . BASEURL . '/mahasiswa' );
                 exit;
             }
