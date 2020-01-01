@@ -61,5 +61,11 @@
 
             return $this->db->rowCount();
         }
+        public function get_mahasiswa_by_name( $nama ) {
+            $this->db->query( "SELECT * FROM mahasiswa WHERE nama LIKE :nama" );
+            $this->db->bind( 'nama', "%$nama%" );
+
+            return $this->db->result_set();
+        }
     }
  ?>

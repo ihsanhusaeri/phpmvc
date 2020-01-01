@@ -11,8 +11,19 @@
         public function detail( $id ) {
             $data['judul'] = 'Daftar Mahasiswa';
             $data['mahasiswa'] = $this->model( 'Mahasiswa_model' )->get_mahasiswa_by_id( $id );
+
             $this->view( 'templates/header', $data );
             $this->view( 'mahasiswa/detail', $data );
+            $this->view( 'templates/footer' );
+        }
+
+        public function cari() {
+            $data['judul'] = 'Cari mahasiswa';
+            $data['mahasiswa'] = $this->model( 'Mahasiswa_model' )->get_mahasiswa_by_name( $_POST['keyword'] );
+
+            // var_dump( $data );
+            $this->view( 'templates/header', $data );
+            $this->view( 'mahasiswa/index', $data );
             $this->view( 'templates/footer' );
         }
         
@@ -56,5 +67,6 @@
                 exit;
             }
         }
+        
     }
 ?>
